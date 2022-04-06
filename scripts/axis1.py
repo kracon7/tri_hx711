@@ -32,18 +32,18 @@ def main(args):
     
     time_start = rospy.Time.now()
 
-	hx = HX711(5, 6)
-	hx.set_reading_format("MSB", "MSB")
-	hx.set_reference_unit(referenceUnit)
-	hx.reset()
-	hx.tare()
-	print("Tare done! Add weight now...")
+    hx = HX711(5, 6)
+    hx.set_reading_format("MSB", "MSB")
+    hx.set_reference_unit(referenceUnit)
+    hx.reset()
+    hx.tare()
+    print("Tare done! Add weight now...")
 
     while not rospy.is_shutdown():
-    	val = hx.get_weight(5)
-    	axis1_msg.data = val
-    	rospy.loginfo('Load cell reading: %f'%val)
-    	axis1_pub.publish(axis1_msg)
+        val = hx.get_weight(5)
+        axis1_msg.data = val
+        rospy.loginfo('Load cell reading: %f'%val)
+        axis1_pub.publish(axis1_msg)
         rate.sleep()
 
     cleanAndExit()
