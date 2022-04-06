@@ -3,6 +3,7 @@ import time
 import sys
 import rospy
 import argparse
+from std_msgs.msg import Int32, Float32
 
 EMULATE_HX711=False
 
