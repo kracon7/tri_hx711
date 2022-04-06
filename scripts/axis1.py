@@ -5,6 +5,8 @@ import rospy
 import argparse
 from std_msgs.msg import Int32, Float32
 
+# axis y
+
 EMULATE_HX711=False
 
 referenceUnit = 1
