@@ -5,7 +5,7 @@ import rospy
 import argparse
 from std_msgs.msg import Int32, Float32
 
-# axis y
+# axis x
 
 EMULATE_HX711=False
 
@@ -30,12 +30,12 @@ def main(args):
     rospy.init_node('laser_controller')
     rate=rospy.Rate(100)
 
-    axis1_pub = rospy.Publisher('/axis_1', Float32, queue_size=1)
-    axis1_msg = Float32()
+    axis3_pub = rospy.Publisher('/axis_3', Float32, queue_size=1)
+    axis3_msg = Float32()
     
     time_start = rospy.Time.now()
 
-    hx = HX711(5, 6)
+    hx = HX711(9, 10)
     hx.set_reading_format("MSB", "MSB")
     hx.set_reference_unit(referenceUnit)
     hx.reset()
@@ -44,9 +44,9 @@ def main(args):
 
     while not rospy.is_shutdown():
         val = hx.get_weight(3)
-        axis1_msg.data = val
+        axis3_msg.data = val
         rospy.loginfo('Load cell reading: %f'%val)
-        axis1_pub.publish(axis1_msg)
+        axis3_pub.publish(axis3_msg)
         rate.sleep()
 
     cleanAndExit()
