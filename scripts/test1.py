@@ -40,7 +40,7 @@ def main(args):
     hx.reset()
 
     while not rospy.is_shutdown():
-        val = hx.get_weight(10)
+        val = hx.get_weight(20)
         axis1_msg.data = val
         rospy.loginfo('Load cell reading: %f'%val)
         axis1_pub.publish(axis1_msg)
