@@ -5,7 +5,7 @@ import rospy
 import argparse
 from std_msgs.msg import Int32, Float32
 
-# axis y
+# axis x
 
 EMULATE_HX711=False
 referenceUnit = 1
@@ -29,12 +29,12 @@ def main(args):
     rospy.init_node('laser_controller')
     rate=rospy.Rate(100)
 
-    axis1_pub = rospy.Publisher('/axis_1', Float32, queue_size=1)
+    axis1_pub = rospy.Publisher('/axis_3', Float32, queue_size=1)
     axis1_msg = Float32()
     
     time_start = rospy.Time.now()
 
-    hx = HX711(5, 6)
+    hx = HX711(9, 10)
     hx.set_reading_format("MSB", "MSB")
     hx.set_reference_unit(referenceUnit)
     hx.reset()
@@ -52,7 +52,6 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run robot closeloop simulation for 2000 times')
     parser.add_argument('--timeout', default=40, type=float, help='total time of image streaming')
-    parser.add_argument('--axis', default=1, type=int, help='load cell axis')
     args = parser.parse_args()
     
     main(args)
