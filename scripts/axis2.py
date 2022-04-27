@@ -9,7 +9,8 @@ from std_msgs.msg import Int32, Float32
 
 EMULATE_HX711=False
 
-referenceUnit = 1
+referenceUnit = -1024
+offset = 1568300
 
 if not EMULATE_HX711:
     import RPi.GPIO as GPIO
@@ -38,9 +39,8 @@ def main(args):
     hx = HX711(7, 8)
     hx.set_reading_format("MSB", "MSB")
     hx.set_reference_unit(referenceUnit)
+    hx.set_offset(offset)
     hx.reset()
-    hx.tare()
-    print("Tare done! Add weight now...")
 
     while not rospy.is_shutdown():
         val = hx.get_weight(3)
